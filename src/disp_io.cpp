@@ -1,4 +1,5 @@
 #include "disp_io.h"
+#include <Arduino.h>
 
 DispIO::DispIO(pin _ser, pin _rc_clk, pin _ser_clk, pin _ser_clr):
 	ser(_ser), rc_clk(_rc_clk), ser_clk(_ser_clk), ser_clr(_ser_clr)
@@ -66,7 +67,7 @@ void DispIO::serial_write_load(byte * data, size_t const N)
 
 void DispIO::serial_clear()
 {
-	pulse(ser_clr);
+	pulse(ser_clr, MICRO_DELAY);
 }
 
 void DispIO::clear()

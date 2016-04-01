@@ -3,14 +3,20 @@
 
 class Segment
 {
-	disp_seg segment;
-	char c;
+protected:
+	seg_disp segment;
 public:
-	Segment(char _c = '0');
+	Segment(byte seg = 0);
 
 	byte get_byte() const;
-	char get_char() const;
 	void dp_high();
 	void dp_low();
 };
 
+class CharSegment : public Segment
+{
+	char c;
+public:
+	CharSegment(char _c = '0');
+	char get_char() const;
+};

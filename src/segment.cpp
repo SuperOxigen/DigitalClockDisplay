@@ -1,25 +1,5 @@
 #include "segment.h"
 
-/*
- *      ### A ###
- *     #         #
- *     #         #
- *     F         B
- *     #         #
- *     #         #
- *      ### G ###
- *     #         #
- *     #         #
- *     E         C
- *     #         #
- *     #         #    ##
- *      ### D ###   # DP #
- *                    ##
- *
- * byte: A|B|C|D|E|F|G|DP
- *       
- */
-
 #define DP_BIT 0x01
 
 byte char_to_segment(char c)
@@ -29,79 +9,74 @@ byte char_to_segment(char c)
     {
     case 'a':
     case 'A':
-        segment = 0xEE;
+        segment = SEG_A;
         break;
     case 'b':
     case 'B':
-        segment = 0x3E;
+        segment = SEG_B;
         break;
     case 'c':
     case 'C':
-        segment = 0x1A;
+        segment = SEG_C;
         break;
     case 'd':
     case 'D':
-        segment = 0x78;
+        segment = SEG_D;
         break;
     case 'e':
     case 'E':
-        segment = 0x9E;
+        segment = SEG_E;
         break;
     case 'f':
     case 'F':
-        segment = 0x8E;
+        segment = SEG_F;
         break;
     case '0':
-        segment = 0xFC;
+        segment = SEG_0;
         break;
     case '1':
-        segment = 0x60;
+        segment = SEG_1;
         break;
     case '2':
-        segment = 0xDA;
+        segment = SEG_2;
         break;
     case '3':
-        segment = 0xF2;
+        segment = SEG_3;
         break;
     case '4':
-        segment = 0x66;
+        segment = SEG_4;
         break;
     case '5':
-        segment = 0xB6;
+        segment = SEG_5;
         break;
     case '6':
-        segment = 0xBE;
+        segment = SEG_6;
         break;
     case '7':
-        segment = 0xE0;
+        segment = SEG_7;
         break;
     case '8':
-        segment = 0xFE;
+        segment = SEG_8;
         break;
     case '9':
-        segment = 0xF6;
+        segment = SEG_9;
         break;
     default:
-        segment = 0xFF;
+        segment = SEG_FLASH;
         break;
     }
 
     return segment;
-} 
+}
 
-Segment::Segment(char _c = '0') : c(_c)
+Segment::Segment(byte seg)
 {
-    this->segment.value = char_to_segment(c);
+    segment.value = seg;
 }
 
 byte Segment::get_byte() const
 {
     return this->segment.value;
-}
-
-char Segment::get_char() const
-{
-    return this->c;
 }
 
 void Segment::dp_high()
@@ -112,4 +87,12 @@ void Segment::dp_high()
 void Segment::dp_low()
 {
     this->segment.value = this->segment.value & ~DP_BIT;
+}
+
+CharSegment::CharSegment(char _c):
+    Segment(char_to_segment(_c)), c(_c) {}
+
+char CharSegment::get_char() const
+{
+    return this->c;
 }

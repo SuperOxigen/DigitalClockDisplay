@@ -6,8 +6,8 @@ class DispIO
 {
 	pin ser; // Data pin
 	pin rc_clk; // Segment refresh clock
-	pin ser_clk // Serial load clock
-	pin ser_clr // Serial clear
+	pin ser_clk; // Serial load clock
+	pin ser_clr; // Serial clear
 
 	void serial_clk();
 	void serial_write_byte(byte data);
@@ -21,4 +21,3 @@ public:
 	void serial_clear();
 	void clear();
 };
-

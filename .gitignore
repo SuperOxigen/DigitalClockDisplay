@@ -1,0 +1,12 @@
+
+# Platform IO dependancies
+
+platformio.ini
+.pioenvs
+.clang_complete
+.gcc-flags.json
+.travis.yml
+lib/readme.txt
+
+# Binaries
+bin
